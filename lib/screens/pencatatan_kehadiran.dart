@@ -1,4 +1,6 @@
+import 'package:absen_list/providers/Kehadiran.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class PencatatanKehadiran extends StatefulWidget {
   const PencatatanKehadiran({super.key});
@@ -8,47 +10,50 @@ class PencatatanKehadiran extends StatefulWidget {
 }
 
 class _PencatatanKehadiranState extends State<PencatatanKehadiran> {
-  List<Map<String, dynamic>> data = [
-    {"nama": "hello world", "check": false},
-    {"nama": "hello world", "check": false},
-    {"nama": "hello world", "check": false},
-    {"nama": "hello world", "check": false},
-    {"nama": "hello world", "check": false},
-    {"nama": "hello world", "check": false},
-    {"nama": "hello world", "check": false},
-    {"nama": "hello world", "check": false},
-    {"nama": "hello world", "check": false},
-    {"nama": "hello world", "check": false},
-    {"nama": "hello world", "check": false},
-    {"nama": "hello world", "check": false},
-    {"nama": "hello world", "check": false},
-    {"nama": "hello world", "check": false},
-    {"nama": "hello world", "check": false},
-    {"nama": "hello world", "check": false},
-  ];
+  // List<Map<String, dynamic>> data = [
+  //   {"nama": "hello world", "check": false},
+  //   {"nama": "hello world", "check": false},
+  //   {"nama": "hello world", "check": false},
+  //   {"nama": "hello world", "check": false},
+  //   {"nama": "hello world", "check": false},
+  //   {"nama": "hello world", "check": false},
+  //   {"nama": "hello world", "check": false},
+  //   {"nama": "hello world", "check": false},
+  //   {"nama": "hello world", "check": false},
+  //   {"nama": "hello world", "check": false},
+  //   {"nama": "hello world", "check": false},
+  //   {"nama": "hello world", "check": false},
+  //   {"nama": "hello world", "check": false},
+  //   {"nama": "hello world", "check": false},
+  //   {"nama": "hello world", "check": false},
+  //   {"nama": "hello world", "check": false},
+  // ];
 
   @override
   Widget build(BuildContext context) {
+       final provider = Provider.of<Kehadiran>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("pencatatan kehadiran"),
       ),
       body: ListView.builder(
-        itemCount: data.length,
+        itemCount: provider.data.length,
         itemBuilder: (context, index) {
+          final dataSiswa = provider.data[index]; 
           return Container(
-            color: Colors.amberAccent,
+            decoration: BoxDecoration(border: Border.all(color: Colors.black)),
             padding: EdgeInsets.all(20),
             margin: EdgeInsets.symmetric(vertical: 5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(data[index]["nama"]),
+                Text("${dataSiswa.name}"),
                 Checkbox(
-                  value: data[index]["check"],
-                  onChanged: (bool? value) {
+                  value:  dataSiswa.check,
+                  onChanged: (value) {
+                      print(value);
                     setState(() {
-                      data[index]["check"] = value!;
+                      dataSiswa.check = value ?? false;
                     });
                   },
                 ),
