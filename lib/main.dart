@@ -1,7 +1,6 @@
 import 'package:absen_list/components/bottom_navigator.dart';
+import 'package:absen_list/components/bottom_navigator_with_page_view.dart';
 import 'package:absen_list/providers/Kehadiran.dart';
-import 'package:absen_list/screens/pencatatan_kehadiran.dart';
-import 'package:absen_list/screens/riwayat_kehadiran.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -24,7 +23,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
         useMaterial3: true,
       ),
-      home: const BottomNavigator(),
+      home:  BottomNavigatorWithPageView(),
     );
   }
 }
