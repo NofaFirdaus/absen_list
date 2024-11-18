@@ -31,7 +31,7 @@ class _PencatatanKehadiranState extends State<PencatatanKehadiran> {
 
   @override
   Widget build(BuildContext context) {
-       final provider = Provider.of<Kehadiran>(context);
+    final provider = Provider.of<Kehadiran>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("pencatatan kehadiran"),
@@ -39,9 +39,14 @@ class _PencatatanKehadiranState extends State<PencatatanKehadiran> {
       body: ListView.builder(
         itemCount: provider.data.length,
         itemBuilder: (context, index) {
-          final dataSiswa = provider.data[index]; 
+          final dataSiswa = provider.data[index];
           return Container(
-            decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+            decoration: BoxDecoration(
+              border: Border(
+                top: BorderSide(color: Colors.brown, width: 2.0),
+                bottom: BorderSide(color: Colors.brown, width: 2.0),
+              ),
+            ),
             padding: EdgeInsets.all(20),
             margin: EdgeInsets.symmetric(vertical: 5),
             child: Row(
@@ -49,9 +54,9 @@ class _PencatatanKehadiranState extends State<PencatatanKehadiran> {
               children: [
                 Text("${dataSiswa.name}"),
                 Checkbox(
-                  value:  dataSiswa.check,
+                  value: dataSiswa.check,
                   onChanged: (value) {
-                      print(value);
+                    print(value);
                     setState(() {
                       dataSiswa.check = value ?? false;
                     });
@@ -62,10 +67,13 @@ class _PencatatanKehadiranState extends State<PencatatanKehadiran> {
           );
         },
       ),
-      floatingActionButton:
-          ElevatedButton(onPressed: () {}, child: Text("simpan")),
-          // bottomNavigationBar: ,
+      floatingActionButton: ElevatedButton(
+          onPressed:(){
+
+              provider.data.any((s) => s.check) ? provider.saveKehadiran(context) : null;
+
+          },
+          child: Text("simpan")),
     );
-    
   }
 }
