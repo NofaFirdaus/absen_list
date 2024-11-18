@@ -2,7 +2,6 @@
 import 'package:absen_list/models/riwayat.dart';
 import 'package:absen_list/models/siswa.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class Kehadiran with ChangeNotifier {
   List<Siswa>data = [
@@ -15,7 +14,7 @@ class Kehadiran with ChangeNotifier {
   List<Riwayat>dataRiwayat=[];
 void saveKehadiran(BuildContext context) {
   DateTime now = DateTime.now();
-  dynamic format = DateFormat('dd MMMM yyyy');
+  // dynamic format = DateFormat('dd MMMM yyyy');
   int kehadiranCount = data.where((s) => s.check).length;
   int tidakHadir = data.length - kehadiranCount;
   // print(kehadiranCount);
